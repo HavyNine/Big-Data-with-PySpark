@@ -167,3 +167,39 @@ by_month_dest.avg("dep_delay").show()
 
 # Standard deviation of departure delay
 by_month_dest.agg(F.stddev("dep_delay")).show()
+
+## 15. Joining ##
+
+# Examine the data
+print(airports.show())
+
+# Rename the faa column
+airports = airports.withColumnRenamed("faa", "dest")
+
+# Join the DataFrames
+flights_with_airports = flights.join(airports, on="dest", how="leftouter")
+
+# Examine the data again
+print(flights_with_airports.show())
+
+## 16. Joining II ##
+
+# Examine the data
+print(airports.show())
+
+# Rename the faa column
+airports = airports.withColumnRenamed("faa","dest")
+
+# Join the DataFrames
+flights_with_airports = flights.join(airports,"dest","leftouter")
+
+# Examine the new DataFrame
+print(flights_with_airports.show())
+
+## String to integer ##
+
+#Cast the columns to integers
+flights = flights.withColumn("arr_delay", flights.arr_delay.cast("integer"))
+flights = flights.withColumn("air_time", flights.air_time.cast("integer"))
+flights = flights.withColumn("month", flights.month.cast("integer"))
+

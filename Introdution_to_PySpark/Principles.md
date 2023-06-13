@@ -156,3 +156,50 @@ This submodule contains many useful functions for computing things like standard
 
 Remember, a SparkSession called **spark** is already in your workspace, along with the Spark DataFrame **df**.
 
+## Joining - 15
+
+The Spark variant of SQL's JOIN is the **.join()** method. This method takes three arguments. The first is the second DataFrame that you want to join with the first one. The second argument, **on**, is the name of the key column(s) as a string. The names of the key column(s) must be the same in each table. The third argument, **how**, specifies the kind of join to perform. In this course we'll always use the value **how="leftouter"**.
+
+The columns in the two DataFrames that you join will be **referred to as the same name** even if the original DataFrames had different names.
+
+## Joining II - 16
+
+In PySpark, joins are performed using the DataFrame method **.join()**. This method takes three arguments. The first is the second DataFrame that you want to join with the first one. The second argument, **on**, is the name of the key column(s) as a string. The names of the key column(s) must be the same in each table. The third argument, **how**, specifies the kind of join to perform. In this course we'll always use the value **how="leftouter"**.
+
+# Machine Learning Pipelines
+
+In the next chapters, you'll learn how to use Spark's machine learning pipelines. These pipelines are very similar to scikit-learn's pipelines, but they're designed specifically for PySpark and big data problems.
+
+At the core of the **pyspark.ml** module are the Transformer and Estimator classes. Almost every other class in the module behaves similarly to these two basic classes.
+
+**Tranformer** classes have a **.transform()** method that takes a DataFrame and returns a new DataFrame; usually the original one with a new column appended. For example, you might use the class **pyspark.ml.feature.Binarizer** to create a new column in a DataFrame that indicates whether a given set of data is above or below a certain value. This is a transformer because it takes a DataFrame and returns a new DataFrame with one more column. **pyspark.ml.feature.Binarizer** has a **.transform()** method.
+
+**Estimator** classes all implement a **.fit()** method. These methods also take a DataFrame, but instead of returning another DataFrame they return a model object. This can be something like a **pyspark.ml.classification.LogisticRegressionModel** object or a **pyspark.ml.regression.LinearRegressionModel** object. This object itself is a transformer, so it has a **.transform()** method that you can use on DataFrames to add another column with predictions.
+
+## Join the DataFrames - 1
+
+In the next two chapters you'll be working to build a model that predicts whether or not a flight will be delayed based on the flights data we've been working with. This model will also include information about the plane that flew the route, so the first step is to join the two tables: flights and planes!
+
+## Data types - 2
+
+Before you get started modeling, it's important to know that Spark only handles numeric data. That means all of the columns in your DataFrame must be either integers or decimals (called 'doubles' in Spark).
+
+When we imported our data, we let Spark guess what kind of information each column held. Unfortunately, Spark doesn't always guess right and you can see that some of the columns in our DataFrame are strings containing numbers and not actual numeric values.
+
+To remedy this, you can use the **.cast()** method combination with the **.withColumn()** method. It's important to note that **.cast()** works on columns, while **.withColumn()** works on DataFrames.
+
+The only argument you need to pass to **.cast()** is the kind of value you want to create, in string form. For example, to create integers, you'll pass the argument "integer" and for decimal numbers you'll use "double".
+
+You can put this call to **.cast()** inside a call to **.withColumn()** to overwrite the already existing column, just like you did in the previous chapter!
+
+## String to integer - 3
+
+Now you'll use the **.cast()** method you learned in the previous exercise to convert all the appropriate columns from your DataFrame model_data to integers!
+
+To convert the type of a column using the **.cast()** method, you can write code like this:
+
+```python  
+dataframe = dataframe.withColumn("col", dataframe.col.cast("new_type"))
+```
+
+## Create a new column - 4
