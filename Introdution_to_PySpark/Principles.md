@@ -203,3 +203,85 @@ dataframe = dataframe.withColumn("col", dataframe.col.cast("new_type"))
 ```
 
 ## Create a new column - 4
+
+In the last exercise, you converted the column **plane_year** to an integer. This column holds the year each plane was manufactured. However, your model will use the planes' age, which is slightly different than the year it was made!
+
+## Making a Boolean - 5
+
+Consider that you're modeling a yes or no question: is the flight late? However, your data contains the arrival delay in minutes for each flight. Thus, you'll need to create a boolean column which indicates whether the flight was late or not!
+
+## Strings and factors - 6
+
+As you know, Spark requires numeric data for modeling. So far you have converted numeric columns to the appropriate data types. Non-numerical columns, however, require more work.
+
+Fortunately, the **.StringIndexer()** function will encode any string column as a column of indices. This is important since Spark models require that all features be contained within a single vector.
+
+## Carrier - 7
+
+In this exercise you'll create a StringIndexer and a OneHotEncoder to code the carrier column. To do this, you'll call the class constructors with the arguments inputCol and outputCol.
+
+The inputCol is the name of the column you want to index or encode, and the outputCol is the name of the new column that the Transformer should create.
+
+## Assemble a vector - 8
+
+The last step in the Pipeline is to combine all of the columns containing our features into a single column. This has to be done before modeling can take place because every Spark modeling routine expects the data to be in this form. You can do this by storing each of the values from a column as an entry in a vector. Then, from the model's point of view, every observation is a vector that contains all of the information about it and a label that tells the modeler what value that observation corresponds to.
+
+Because of this, the pyspark.ml.feature submodule contains a class called **VectorAssembler**. This Transformer takes all of the columns you specify and combines them into a new vector column.
+
+## Create the pipeline - 9
+
+You're finally ready to create a Pipeline!
+
+**Pipeline** is a class in the pyspark.ml module that combines all the Estimators and Transformers that you've already created. This lets you reuse the same modeling process over and over again by wrapping it up in one simple object. Neat, right?
+
+Import Pipeline from pyspark.ml.
+Call the Pipeline() constructor with the keyword argument stages to create a Pipeline. Stages should be a list holding all the stages you want your data to go through in the pipeline.
+
+
+## Test vs Train - 10
+
+After you've cleaned your data and gotten it ready for modeling, one of the most important steps is to split the data into a test set and a train set. After that, don't touch your test data until you think you have a good model! As you're building models and forming hypotheses, you can test them on your training data to get an idea of their performance.
+
+Once you've got your favorite model, you can see how well it predicts the new data in your test set. This never-before-seen data will give you a much more realistic idea of your model's performance in the real world when new data rolls in and you start making predictions on it.
+
+## Transform the data - 11
+
+Hooray, now you're finally ready to pass your data through the Pipeline you created!
+
+Create the DataFrame piped_data by calling the Pipeline methods **.fit()** and **.transform()** in a chain. Both of these methods take model_data as their only argument.
+
+## Split the data - 12
+
+Now that you've done all your manipulations, the last step before modeling is to split the data! Use the Dataframe method **.randomSplit()** to split piped_data into two pieces, as example training with 60% of the data, and test with 40% of the data by passing the list [.6, .4] to the **.randomSplit()** method.
+
+
+# Model tuning and selection
+
+## What is logistic regression? - 1
+
+The model you'll be fitting in this chapter is called a **logistic regression**. This is a classification model that is best used when your Y variable - what you are trying to predict - is categorical. In this case, you'll be predicting if a flight is delayed or not, which is a binary categorical variable.
+
+## Create the modeler - 2
+
+The Estimator you'll be using is a **LogisticRegression** from the pyspark.ml.classification submodule.
+
+Import the LogisticRegression class from pyspark.ml.classification.
+Create a LogisticRegression called lr by calling LogisticRegression() with no arguments.
+
+## Cross validation - 3
+
+In the next few exercises you'll be tuning your logistic regression model using a procedure called **k-fold cross validation**. This is a method of estimating the model's performance on unseen data (like your test DataFrame). 
+
+It works by splitting the training data into a few different partitions. The exact number is up to you, but in this course you'll be using PySpark's default value of three. Once the data is split up, one of the partitions is set aside, and the model is fit on the remaining partitions. Then the error is measured against the held out partition. This is repeated for each of the partitions, so that every block of data is held out and used as a test set exactly once. Then the error on each of the partitions is averaged. This is called the **cross validation error** of the model, and is a good estimate of the actual error on the held out data.
+
+You'll be using cross validation to choose the hyperparameters by creating a grid of the possible pairs of values for the two hyperparameters, **elasticNetParam** and **regParam**, and using the cross validation error to compare all the different models so you can choose the best one!
+
+## Create the evaluator - 4
+
+The first thing you need when doing cross validation for model selection is a way to compare different models. Luckily, the pyspark.ml.evaluation submodule has classes for evaluating different kinds of models. Your model is a binary classification model, so you'll be using the **BinaryClassificationEvaluator** from the pyspark.ml.evaluation module.
+
+This evaluator calculates the area under the ROC. This is a metric that combines the two kinds of errors a binary classifier can make - false positives and false negatives - into a simple number. You'll learn more about this towards the end of the chapter!
+
+## Make a grid - 5
+
+Next, you need to create a grid of values to search over when looking for the optimal hyperparameters. The submodule pyspark.ml.tuning includes a class called **ParamGridBuilder** that does just that (maybe you're starting to notice a pattern here; PySpark has a submodule for just about everything!).
