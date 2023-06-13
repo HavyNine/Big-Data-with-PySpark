@@ -270,3 +270,20 @@ from pyspark.ml.evaluation import BinaryClassificationEvaluator
 
 #Create a BinaryClassificationEvaluator
 evaluator = BinaryClassificationEvaluator(metricName="areaUnderROC")
+
+## 27. Make a grid ##
+
+#Import the tuning submodule
+from pyspark.ml.tuning import ParamGridBuilder
+
+#Create the parameter grid
+grid = ParamGridBuilder().addGrid(lr.regParam, np.arange(0, .1, .01)).addGrid(lr.elasticNetParam, [0, 1]).build()
+
+# Add the hyperparameter
+grid = grid.addGrid(lr.maxIter, [10, 100, 1000]).build()
+grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01)).build()
+
+# Build the grid
+grid = grid.build()
+
+## 28. Make the validator ##
