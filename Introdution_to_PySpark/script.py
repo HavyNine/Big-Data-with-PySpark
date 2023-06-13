@@ -139,3 +139,31 @@ flights.filter(flights.carrier == "DL").filter(flights.origin == "SEA").groupBy(
 
 # Total hours in the air
 flights.withColumn("duration_hrs", flights.air_time/60).groupBy().sum("duration_hrs").show()
+
+## 13. Grouping and Aggregating I ##
+
+# Group by tailnum
+by_plane = flights.groupBy("tailnum")
+
+# Number of flights each plane made
+by_plane.count().show()
+
+# Group by origin
+by_origin = flights.groupBy("origin")
+
+# Average duration of flights from PDX and SEA
+by_origin.avg("air_time").show()
+
+## 14. Grouping and Aggregating II ##
+
+# Import pyspark.sql.functions as F
+import pyspark.sql.functions as F
+
+# Group by month and dest
+by_month_dest = flights.groupBy("month", "dest")
+
+# Average departure delay by month and destination
+by_month_dest.avg("dep_delay").show()
+
+# Standard deviation of departure delay
+by_month_dest.agg(F.stddev("dep_delay")).show()

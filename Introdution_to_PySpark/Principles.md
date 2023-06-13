@@ -135,3 +135,24 @@ df.groupBy().min("col").show()
 
 This creates a GroupedData object (so you can use the *.min()* method), then finds the minimum value in *col*, and returns it as a DataFrame.
 
+## Aggregating II - 12
+
+When you use *.groupBy()* you can still use any of the common aggregation methods on the resulting GroupedData object.
+
+
+## Grouping and Aggregating I - 13
+
+Part of what makes aggregating so powerful is the addition of groups. PySpark has a whole class devoted to grouped data frames: **pyspark.sql.GroupedData**, which you saw in the last exercise.
+
+You've learned how to create a grouped DataFrame by calling the *.groupBy()* method on a DataFrame with no arguments.
+
+Now you'll see that when you pass the name of one or more columns in your DataFrame to the *.groupBy()* method, the aggregation methods behave like when you use a **GROUP BY** statement in a SQL query!
+
+## Grouping and Aggregating II - 14
+
+In addition to the GroupedData methods you've already seen, there is also the *.agg()* method. This method lets you pass an aggregate column expression that uses any of the aggregate functions from the **pyspark.sql.functions** submodule.
+
+This submodule contains many useful functions for computing things like standard deviations. All the aggregation functions in this submodule take the name of a column in a GroupedData table.
+
+Remember, a SparkSession called **spark** is already in your workspace, along with the Spark DataFrame **df**.
+
