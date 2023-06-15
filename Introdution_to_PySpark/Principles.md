@@ -289,3 +289,37 @@ Next, you need to create a grid of values to search over when looking for the op
 You'll need to use the .addGrid() and .build() methods to create a grid that you can use for cross validation. The .addGrid() method takes a model parameter (an attribute of the model Estimator, lr, that you created a few exercises ago) and a list of values that you want to try. The .build() method takes no arguments, it just returns the grid that you'll use later.
 
 ## Make the validator - 6
+
+The submodule pyspark.ml.tuning also has a class called **CrossValidator** for performing cross validation. This Estimator takes the modeler you want to fit, the grid of hyperparameters you created, and the evaluator you want to use to compare your models.
+
+Create a CrossValidator by calling tune.CrossValidator() with the arguments:
+- estimator=lr
+- estimatorParamMaps=grid
+- evaluator=evaluator
+- Name this object cv.
+
+## Fit the model(s) - 7
+
+You're finally ready to fit the models and select the best one!
+
+Unfortunately, cross validation is a very computationally intensive procedure.
+
+To do this locally you would use the code:
+
+```python
+# Fit cross validation models
+models = cv.fit(training)
+
+# Extract the best model
+best_lr = models.bestModel
+```
+
+Remember, the training data is called training and you're using lr to fit a logistic regression model. Cross validation selected the parameter values regParam=0 and elasticNetParam=0 as being the best. These are the default values, so you don't need to do anything else with lr before fitting the model.
+
+## Evaluate the model - 8
+
+The good news is you only have to fit the model once, because once you've trained the model you can evaluate it on a test set using the same metrics you used earlier!
+
+The evaluator you made, **evaluator**, is stored in your workspace. Use the .transform() method of the best model you obtained from cross validation to generate predictions on the test set. Then use the evaluator to compute the AUC metric for your predictions.
+
+

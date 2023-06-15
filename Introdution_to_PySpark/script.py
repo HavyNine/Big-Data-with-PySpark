@@ -277,13 +277,35 @@ evaluator = BinaryClassificationEvaluator(metricName="areaUnderROC")
 from pyspark.ml.tuning import ParamGridBuilder
 
 #Create the parameter grid
-grid = ParamGridBuilder().addGrid(lr.regParam, np.arange(0, .1, .01)).addGrid(lr.elasticNetParam, [0, 1]).build()
+grid = ParamGridBuilder()
 
 # Add the hyperparameter
-grid = grid.addGrid(lr.maxIter, [10, 100, 1000]).build()
-grid = grid.addGrid(lr.regParam, np.arange(0, .1, .01)).build()
+grid = grid.addGrid(lr.regParam,np.arange(0, .1, .01))
+grid = grid.addGrid(lr.elasticNetParam, [0,1]).build()
 
 # Build the grid
 grid = grid.build()
 
 ## 28. Make the validator ##
+
+#Import the CrossValidator
+from pyspark.ml.tuning import CrossValidator
+
+#Create the CrossValidator
+cv = CrossValidator(estimator=lr, estimatorParamMaps=grid, evaluator=evaluator)
+
+## 29. Fit the model(s) ##
+
+#Call lr.fit()
+best_lr = lr.fit(training)
+
+#Print best_lr
+print(best_lr)
+
+## 30. Evaluate the model ##
+
+#Use the model to predict the test set
+test_results = best_lr.transform(test)
+
+#Evaluate the predictions
+print(evaluator.evaluate(test_results))
