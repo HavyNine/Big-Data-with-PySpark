@@ -29,3 +29,22 @@ PySpark can easily create RDDs from files that are stored in external storage de
 
 ## Partitions in your data - 3
 
+SparkContext's textFile() method takes an optional second argument called minPartitions for specifying the minimum number of partitions. In this exercise, you'll create an RDD named myRDD_part with 6 partitions and then compare that with myRDD that you created in the previous exercise. Refer to the "Understanding Partition" slide in video 2.1 to know the methods for creating and getting the number of partitions in an RDD.
+
+## Map and Collect - 4
+
+The main method by which you can manipulate data in PySpark is using map(). The map() transformation takes in a function and applies it to each element in the RDD. It can be used to do any number of things, from fetching the website associated with each URL in our collection to just squaring the numbers. 
+
+
+## Filter and Count - 5
+
+The RDD transformation filter() returns a new RDD containing only the elements that satisfy a particular function. It is useful for filtering large datasets based on a keyword.
+
+## ReduceBykey and Collect - 6
+
+One of the most popular pair RDD transformations is reduceByKey() which operates on key, value (k,v) pairs and merges the values for each key
+
+## SortByKey and Collect - 7
+
+Another pair RDD transformation available to you is sortByKey(), which sorts the elements in the RDD based on the key.
+

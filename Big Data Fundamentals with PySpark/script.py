@@ -67,3 +67,48 @@ fileRDD_part = spark.sparkContext.textFile(file_path, minPartitions=5)
 # Check the number of partitions in fileRDD_part
 print("Number of partitions in fileRDD_part is", fileRDD_part.getNumPartitions())
 
+
+## 4. Map and Collect
+
+# Create map() transformation to cube numbers
+cubedRDD = numbRDD.map(lambda x: x**3)
+
+# Collect the results
+numbers_all = cubedRDD.collect()
+
+# Print the numbers from numbers_all
+for numb in numbers_all:
+    print(numb)
+
+## 5. Filter and Count
+
+# Filter the fileRDD to select lines with Spark keyword
+fileRDD_filter = fileRDD.filter(lambda line: 'Spark' in line)
+
+# How many lines are there in fileRDD?
+print("The total number of lines with the keyword Spark is", fileRDD_filter.count())
+
+# Print the first four lines of fileRDD
+for line in fileRDD_filter.take(4):
+    print(line)
+
+## 6. ReduceBykey and Collect
+
+# Create PairRDD Rdd with key value pairs
+Rdd = spark.sparkContext.parallelize([(1, 2), (3, 4), (3, 6), (4, 5)])
+
+# Apply reduceByKey() operation on Rdd
+Rdd_Reduced = Rdd.reduceByKey(lambda x, y: x + y)
+
+# Iterate over the result and print the output
+for num in Rdd_Reduced.collect():
+    print("Key {} has {} Counts".format(num[0], num[1]))
+
+## 7. SortByKey and Collect
+
+# Sort the reduced RDD with the key by descending order
+Rdd_Reduced_Sort = Rdd_Reduced.sortByKey(ascending=False)
+
+# Iterate over the result and print the output
+for num in Rdd_Reduced_Sort.collect():
+    print("Key {} has {} Counts".format(num[0], num[1]))
