@@ -2,7 +2,7 @@
  Learn Track about PySpark
 PySpark is a Python API for Apache Spark, a distributed computing framework that allows processing large-scale data in parallel. PySpark enables users to write Spark applications using Python, one of the most popular programming languages for data science and machine learning. In this blog post, we will introduce some of the main features and benefits of PySpark, and show how to get started with it.
 
-PySpark Features and Benefits
+## PySpark Features and Benefits
 
 PySpark offers several advantages over using Spark with other languages, such as Scala or Java. Some of these are:
 
@@ -18,7 +18,7 @@ PySpark also inherits all the features and benefits of Apache Spark, such as:
 - Spark supports lazy evaluation and in-memory caching of data, which improves the performance and efficiency of data processing. Users can use PySpark's persist() and cache() methods to store intermediate results in memory or disk for faster access in subsequent operations.
 - Spark supports distributed computing across multiple nodes in a cluster, which enables scaling up or down the resources according to the workload. Users can use PySpark's spark-submit command or SparkSession builder to configure and launch their applications on a local or remote cluster.
 
-How to Get Started with PySpark
+## How to Get Started with PySpark
 
 To use PySpark, users need to install Python (version 3.6 or higher) and Apache Spark (version 3.0 or higher) on their machines or clusters. Users can download the pre-built binaries of Spark from its official website (https://spark.apache.org/downloads.html) or use package managers such as pip or conda to install it. Users also need to set the environment variables SPARK_HOME (to point to the Spark installation directory) and PYSPARK_PYTHON (to point to the Python executable).
 
@@ -44,7 +44,7 @@ spark-submit my_app.py
 
 This will run the code in my_app.py using the default settings of Spark. Users can also specify additional options such as --master (to specify the cluster manager), --deploy-mode (to specify whether to run the driver on the cluster or locally), --conf (to specify custom configuration properties), --packages (to specify external dependencies), and more. For a full list of options, users can refer to the Spark documentation (https://spark.apache.org/docs/latest/submitting-applications.html).
 
-PySpark Examples
+## PySpark Examples
 
 To illustrate how to use PySpark, we will show some simple examples of data processing tasks using PySpark's DataFrame API. We assume that the users have already set up their PySpark environment and launched a PySpark session as described above.
 
