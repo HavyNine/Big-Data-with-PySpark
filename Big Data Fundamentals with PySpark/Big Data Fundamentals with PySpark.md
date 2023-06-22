@@ -48,3 +48,30 @@ One of the most popular pair RDD transformations is reduceByKey() which operates
 
 Another pair RDD transformation available to you is sortByKey(), which sorts the elements in the RDD based on the key.
 
+## CountingBykeys - 8
+
+For many datasets, it is important to count the number of keys in a key/value dataset. For example, counting the number of countries where the product was sold or to show the most popular baby names. In this simple exercise, you'll use the Rdd that you created earlier and count the number of unique keys in that pair RDD.
+
+## Create a base RDD and transform it - 9
+
+The volume of unstructured data in existence is growing every year. Unstructured data is the data that does not have a predefined data model or organization such as text files and images. In this 3 part exercise, you will write a code that calculates the most common words from Complete Works of William Shakespeare.
+
+Here are the brief steps for writing the word counting program:
+
+* Create a base RDD from Complete_Shakespeare.txt file.
+* Use RDD transformation to create a long list of words from each element of the base RDD.
+* Remove stop words from your data.
+* Create pair RDD where each element is a pair tuple of ('w', 1)
+* Group the elements of the pair RDD by key (word) and add up their values.
+* Swap the keys (word) and values (counts) so that keys is count and value is the word.
+* Finally, sort the RDD by descending order and print the 10 most frequent words and their frequencies.
+
+## Remove stop words and reduce the dataset - 10
+
+After splitting the lines in the file into a long list of words in the previous exercise, in the next step, you'll remove stop words from your data. Stop words are common words that are often uninteresting. For example "I", "the", "a" etc., are stop words.
+
+## Print word frequencies - 11
+
+After combining the two datasets and removing stop words, in the last step, you'll print the word frequencies of the top 10 most frequent words. You could have retrieved all the elements at once using collect() but it is bad practice and not recommended. RDDs can be huge: you may run out of memory and crash your computer..
+
+What if we want to return the top 10 words? For this, first you'll need to swap the key (word) and values (counts) so that keys is count and value is the word. After you swap the key and value in the tuple, you'll sort the pair RDD based on the key (count). This way it is easy to sort the RDD based on the key rather than the key using sortByKey operation in PySpark. Finally, you'll return the top 10 words from the sorted RDD.
