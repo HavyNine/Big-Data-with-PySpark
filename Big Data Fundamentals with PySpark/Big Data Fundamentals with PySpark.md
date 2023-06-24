@@ -75,3 +75,12 @@ After splitting the lines in the file into a long list of words in the previous 
 After combining the two datasets and removing stop words, in the last step, you'll print the word frequencies of the top 10 most frequent words. You could have retrieved all the elements at once using collect() but it is bad practice and not recommended. RDDs can be huge: you may run out of memory and crash your computer..
 
 What if we want to return the top 10 words? For this, first you'll need to swap the key (word) and values (counts) so that keys is count and value is the word. After you swap the key and value in the tuple, you'll sort the pair RDD based on the key (count). This way it is easy to sort the RDD based on the key rather than the key using sortByKey operation in PySpark. Finally, you'll return the top 10 words from the sorted RDD.
+
+
+## RDD to DataFrame - 12
+
+Similar to RDDs, DataFrames are immutable and distributed in nature. You can create DataFrame from RDDs. SparkSession provides an easy method to create DataFrame from an existing RDD. Even though RDDs are a fundamental data structure in Spark, working with data in DataFrame is easier than RDD, and so understanding of how to convert RDD to DataFrame is necessary.
+
+## Loading CSV into DataFrame - 13
+
+In the previous exercise, you have seen a method of creating DataFrame but generally, loading data from CSV file is the most common method of creating DataFrames. In this exercise, you'll create a PySpark DataFrame from a people.csv file that is already provided to you as a file_path and confirm the created object is a PySpark DataFrame.

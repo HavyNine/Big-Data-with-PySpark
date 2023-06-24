@@ -163,3 +163,21 @@ resultRDD_swap_sort = resultRDD_swap.sortByKey(ascending=False)
 for word in resultRDD_swap_sort.take(10):
     print("{} has {} counts".format(word[1], word[0]))
 
+## 12. RDD to DataFrame
+
+# Create an RDD from the list
+rdd = sc.parallelize(sample_list)
+
+# Create a PySpark DataFrame
+names_df = spark.createDataFrame(rdd, schema=['name', 'age'])
+
+# Check the type of people_df
+print("The type of names_df is", type(names_df))
+
+## 13. Loading CSV into DataFrame
+
+# Load the Dataframe
+people_df = spark.read.csv(file_path, header=True, inferSchema=True)
+
+# Check the type of people_df
+print("The type of people_df is", type(people_df))
