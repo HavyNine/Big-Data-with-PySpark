@@ -84,3 +84,8 @@ Similar to RDDs, DataFrames are immutable and distributed in nature. You can cre
 ## Loading CSV into DataFrame - 13
 
 In the previous exercise, you have seen a method of creating DataFrame but generally, loading data from CSV file is the most common method of creating DataFrames. In this exercise, you'll create a PySpark DataFrame from a people.csv file that is already provided to you as a file_path and confirm the created object is a PySpark DataFrame.
+
+
+## Inspecting data in PySpark DataFrame - 14
+
+Inspecting data is very crucial before performing analysis such as plotting, modeling, training etc., In this simple exercise, you'll inspect the data in the people_df DataFrame that you have created in the previous exercise using basic DataFrame operators.
