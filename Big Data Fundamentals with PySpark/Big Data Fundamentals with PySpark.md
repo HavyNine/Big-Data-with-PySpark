@@ -89,3 +89,12 @@ In the previous exercise, you have seen a method of creating DataFrame but gener
 ## Inspecting data in PySpark DataFrame - 14
 
 Inspecting data is very crucial before performing analysis such as plotting, modeling, training etc., In this simple exercise, you'll inspect the data in the people_df DataFrame that you have created in the previous exercise using basic DataFrame operators.
+
+## PySpark DataFrame subsetting and cleaning - 15
+
+After data inspection, it is often necessary to clean the data which mainly involves subsetting, renaming the columns, removing duplicated rows etc., In this simple exercise, you'll practice subsetting, renaming the columns and removing duplicate rows. Pyspark DataFrame API provides a number of functions to do this task effortlessly.
+
+## Filtering your DataFrame - 16
+
+In the previous exercise, you have subset the data using select() operator which is mainly used to subset the DataFrame column-wise. What if you want to subset the DataFrame based on a condition (for example, select all rows where the sex is Female). In this exercise, you will filter the rows in the people_df DataFrame in which 'sex' is female and male and create two different datasets. Finally, you'll count the number of rows in each of those datasets.
+
