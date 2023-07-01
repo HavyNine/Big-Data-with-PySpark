@@ -218,4 +218,17 @@ people_df_male = people_df.filter(people_df.sex == "male")
 # Count the number of rows 
 print("There are {} rows in the people_df_female DataFrame and {} rows in the people_df_male DataFrame".format(people_df_female.count(), people_df_male.count()))
 
+## 17. Running SQL Queries Programmatically
+
+# Register the DataFrame as a table
+people_df.createOrReplaceTempView("people")
+
+# Construct a query to select the names of the people from the 'people' table
+query = '''SELECT name FROM people'''
+
+# Assign the result of Spark's query to people_df_names
+people_df_names = spark.sql(query)
+
+# Print the top 10 names of the people
+people_df_names.show(10)
 
