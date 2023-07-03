@@ -232,3 +232,58 @@ people_df_names = spark.sql(query)
 # Print the top 10 names of the people
 people_df_names.show(10)
 
+## 18. SQL queries for filtering Table
+
+# Filter the people to select female sex
+people_female_df = spark.sql('SELECT * FROM people WHERE sex=="female"')
+
+# Filter the people table DataFrame to select male sex
+people_male_df = spark.sql('SELECT * FROM people WHERE sex=="male"')
+
+# Count the number of rows in both DataFrames
+print("There are {} rows in the people_female_df and {} rows in the people_male_df DataFrames".format(people_female_df.count(), people_male_df.count()))
+
+## 19. PySpark DataFrame visualization
+
+# Check the column names of names_df
+print("The column names of names_df are", names_df.columns)
+
+# Convert to Pandas DataFrame
+df_pandas = names_df.toPandas()
+
+# Create a horizontal bar plot
+df_pandas.plot(kind='barh', x='name', y='age', colormap='winter_r')
+plt.show()
+
+
+## 20. Part 1: Create a DataFrame from CSV file
+
+# Load the Dataframe
+fifa_df = spark.read.csv(file_path, header=True, inferSchema=True)
+
+# Check the schema of columns
+fifa_df.printSchema()
+
+## 21. Part 2: SQL Queries on DataFrame
+
+# Create a temporary view of fifa_df
+fifa_df.createOrReplaceTempView("fifa_df_table")
+
+# Construct the "query"
+query = '''SELECT * FROM fifa_df_table WHERE Nationality = "Germany"'''
+
+# Apply the SQL "query"
+fifa_df_germany = spark.sql(query)
+
+# Generate basic statistics
+fifa_df_germany.describe().show()
+
+## 22. Part 3: Data visualization
+
+# Convert fifa_df to fifa_df_germany_pandas DataFrame
+fifa_df_germany_pandas = fifa_df_germany.toPandas()
+
+# Plot the 'Age' density of Germany Players
+fifa_df_germany_pandas.plot(kind='density',  figsize=(14, 10), linewidth=3)
+plt.xlabel('Age')
+plt.show()

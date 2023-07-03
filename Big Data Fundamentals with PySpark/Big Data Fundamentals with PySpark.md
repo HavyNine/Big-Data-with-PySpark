@@ -102,5 +102,23 @@ In the previous exercise, you have subset the data using select() operator which
 
 DataFrames can easily be manipulated using SQL queries in PySpark. The sql() function on a SparkSession enables applications to run SQL queries programmatically and returns the result as another DataFrame. In this exercise, you'll create a temporary table of the people_df DataFrame that you created previously, then construct a query to select the names of the people from the temporary table and assign the result to a new DataFrame.
 
-## SQL Queries on DataFrame - 18
+## SQL Queries for filtering Table - 18
+
+There are more sophisticated queries you can construct to obtain the result you're looking for. In this exercise, you'll use the SQL query to pass a more complex query and assign the result to a new DataFrame. You'll also create a temporary table of the people_df DataFrame that you created previously. The SQL query selects the names of the people from the temporary table and returns it as another DataFrame.
+
+## PySpark DataFrame visualization - 19
+
+After creating dataframes from the raw dataset, in the real world, we usually want to explore insights from datasets with visualization. Although there are several visualization packages in Python, in this course, we will be using the built-in visualization method df.show(). df.show(n=30, truncate=False) prints n rows of the dataframe. To display all rows, set n to the number of rows in the dataframe. truncate=False ensures that long strings in the rows will not be truncated. In this exercise, you'll explore the data in the people_df DataFrame created at the beginning of this chapter using these techniques.
+
+## Part 1: Create a DataFrame from CSV file - 20
+
+Every 4 years, the soccer fans throughout the world celebrates a festival called “Fifa World Cup” and with that, everything seems to change in many countries. In this exercise, you'll begin to explore the dataset carefully to have a better understanding of the data that you'll be working with throughout the course.
+
+## Part 2: SQL Queries on DataFrame - 21
+
+After creating DataFrames from CSV files, you can easily run SQL queries on them by registering them as temporary tables. Remember, you can run SQL queries over DataFrames that were created using either read.csv() or sqlContext.read.csv() methods. In the previous exercise, you have already seen an example of this. In this exercise, you'll create a temporary table of the people_df DataFrame that you created previously, then construct a query to select the names of the people from the temporary table and assign the result to a new DataFrame.
+
+## Part 3: Data visualization - 22
+
+Data visualization is important for exploratory data analysis (EDA). It is equally important when it comes to communicating the results of your analysis. In this exercise, you'll create plots that visualize the count of countries who participated in either the 2010 or 2014 World Cup. You'll also create a pie chart visualization of the teams with most world cup final victories.
 
