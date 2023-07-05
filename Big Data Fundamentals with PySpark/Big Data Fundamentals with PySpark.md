@@ -124,6 +124,8 @@ Data visualization is important for exploratory data analysis (EDA). It is equal
 
 # Machine Learning with PySpark MLlib
 
+### Colaborative Filtering
+
 ## PySpark MLlib algorithms - 1
 
 PySpark MLlib provides a number of options when it comes to building machine learning models. In this exercise, you will get introduced to the algorithms currently supported in PySpark MLlib. The goal here is to understand the syntax for implementing these algorithms and get a high level understanding of the steps involved in building a machine learning model. 
@@ -138,3 +140,18 @@ In the first part, you'll first load the MovieLens data (ratings.csv) into RDD a
 ## Model training and predictions - 3
 
 After splitting the data into training and test data, in the second part of the exercise, you'll train the ALS algorithm using the training data. PySpark MLlib's ALS algorithm has the following mandatory parameters - rank (the number of latent factors in the model) and iterations (number of iterations to run). After training the ALS model, you can use the model to predict the ratings from the test data. For this, you will provide the user and item columns from the test dataset and finally print the first 2 rows of predictions.
+
+## Model evaluation using MSE - 4
+
+After generating the predicted ratings from the test data using ALS model, in the final part of the exercise, you'll prepare the data for calculating Mean Squared Error (MSE) of the model. The MSE is the average value of (original rating – predicted rating)^2 for all users and indicates the absolute fit of the model to the data. To do this, first, you'll map the ratings from the test RDD and predictions RDDs into a tuple of the form ((user, product), rating)). Then, you'll join the ratings and prediction tuples together. Finally, you'll calculate the MSE by using values from the joined RDD.
+
+### Classification
+
+## Loading the data - 5
+
+Logistic Regression is a popular method to predict a categorical response. Probably one of the most common applications of the logistic regression is the message or email spam classification. In this 3-part exercise, you'll create an email spam classifier with logistic regression using Spark MLlib. Here are the brief steps for creating a spam classifier.
+
+- Create an RDD of strings representing email.
+- Run MLlib’s feature extraction algorithms to convert text into an RDD of vectors.
+- Call a classification algorithm on the RDD of vectors to return a model object to classify new points.
+- Evaluate the model on a test dataset using one of MLlib’s evaluation functions.

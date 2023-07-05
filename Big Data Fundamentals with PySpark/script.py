@@ -329,3 +329,34 @@ predictions = model.predictAll(testdata_no_rating)
 
 # Return the first 2 rows of the RDD
 predictions.take(2)
+
+## 4. Model evaluation using MSE
+
+# Prepare ratings data
+rates = ratings_final.map(lambda r: ((r[0], r[1]), r[2]))
+
+# Prepare predictions data
+preds = predictions.map(lambda r: ((r[0], r[1]), r[2]))
+
+# Join the ratings data with predictions data
+rates_and_preds = rates.join(preds)
+
+# Calculate and print MSE
+MSE = rates_and_preds.map(lambda r: (r[1][0] - r[1][1])**2).mean()
+print("Mean Squared Error of the model for the test data = {:.2f}".format(MSE))
+
+## 5. Loading spam and non-spam data
+
+# Load the datasets into RDDs
+spam_rdd = sc.textFile(file_path_spam)
+
+non_spam_rdd = sc.textFile(file_path_non_spam)
+
+# Split the email messages into words
+spam_words = spam_rdd.flatMap(lambda email: email.split(' '))
+non_spam_words = non_spam_rdd.flatMap(lambda email: email.split(' '))
+
+# Print the first element in the split RDD
+print("The first element in spam_words is", spam_words.first())
+print("The first element in non_spam_words is", non_spam_words.first())
+
