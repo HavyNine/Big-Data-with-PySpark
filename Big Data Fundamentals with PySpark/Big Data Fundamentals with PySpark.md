@@ -122,3 +122,19 @@ After creating DataFrames from CSV files, you can easily run SQL queries on them
 
 Data visualization is important for exploratory data analysis (EDA). It is equally important when it comes to communicating the results of your analysis. In this exercise, you'll create plots that visualize the count of countries who participated in either the 2010 or 2014 World Cup. You'll also create a pie chart visualization of the teams with most world cup final victories.
 
+# Machine Learning with PySpark MLlib
+
+## PySpark MLlib algorithms - 1
+
+PySpark MLlib provides a number of options when it comes to building machine learning models. In this exercise, you will get introduced to the algorithms currently supported in PySpark MLlib. The goal here is to understand the syntax for implementing these algorithms and get a high level understanding of the steps involved in building a machine learning model. 
+
+## Loading Movie Lens dataset into RDDs - 2
+
+Collaborative filtering is a technique for recommender systems wherein users' ratings and interactions with various products are used to recommend new ones. With the advent of Machine Learning and parallelized processing of data, Recommender systems have become widely popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags. In this 3-part exercise, your goal is to develop a simple movie recommendation system using PySpark MLlib using a subset of MovieLens 100k dataset.
+
+In the first part, you'll first load the MovieLens data (ratings.csv) into RDD and from each line in the RDD which is formatted as userId,movieId,rating,timestamp, you'll need to map the MovieLens data to a Ratings object (userID, productID, rating) after removing timestamp column and finally you'll split the RDD into training and test RDDs.
+
+
+## Model training and predictions - 3
+
+After splitting the data into training and test data, in the second part of the exercise, you'll train the ALS algorithm using the training data. PySpark MLlib's ALS algorithm has the following mandatory parameters - rank (the number of latent factors in the model) and iterations (number of iterations to run). After training the ALS model, you can use the model to predict the ratings from the test data. For this, you will provide the user and item columns from the test dataset and finally print the first 2 rows of predictions.
