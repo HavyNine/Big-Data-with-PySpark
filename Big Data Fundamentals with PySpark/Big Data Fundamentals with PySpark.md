@@ -155,3 +155,13 @@ Logistic Regression is a popular method to predict a categorical response. Proba
 - Run MLlib’s feature extraction algorithms to convert text into an RDD of vectors.
 - Call a classification algorithm on the RDD of vectors to return a model object to classify new points.
 - Evaluate the model on a test dataset using one of MLlib’s evaluation functions.
+
+## Feature hashing and LabelPoint - 6
+
+After splitting the emails into words, our raw data set of 'spam' and 'non-spam' is currently composed of 1-line messages consisting of spam and non-spam messages. In order to classify these messages, we need to convert text into features.
+
+In the second part of the exercise, you'll first create a HashingTF() instance to map text to vectors of 200 features, then for each message in 'spam' and 'non-spam' files you'll split them into words, and each word is mapped to one feature. These are the features that will be used to decide whether a message is 'spam' or 'non-spam'. Next, you'll create labels for features. For a valid message, the label will be 0 (i.e. the message is not spam) and for a 'spam' message, the label will be 1 (i.e. the message is spam). Finally, you'll combine both the labeled datasets.
+
+## Logistic Regression model training - 7
+
+After creating labels and features for the data, we’re ready to build a model that can learn from it (training). But before you train the model, in this final part of the exercise, you'll split the data into training and test, run Logistic Regression model on the training data, and finally check the accuracy of the model trained on training data.
