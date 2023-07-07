@@ -393,3 +393,18 @@ labels_and_preds = test_samples.map(lambda x: x.label).zip(predictions)
 # Check the accuracy of the model on the test data
 accuracy = labels_and_preds.filter(lambda x: x[0] == x[1]).count() / float(test_samples.count())
 print("Model accuracy : {:.2f}".format(accuracy))
+
+
+### clustering ###
+
+## 8. Loading and parsing the 5000 points data
+clusterRDD = sc.textFile(file_path)
+
+# Split the RDD based on tab
+rdd_split = clusterRDD.map(lambda x: x.split("\t"))
+
+# Transform the split RDD by creating a list of integers
+rdd_split_int = rdd_split.map(lambda x: [int(x[0]), int(x[1])])
+
+# Count the number of rows in RDD
+print("There are {} rows in the rdd_split_int dataset".format(rdd_split_int.count()))

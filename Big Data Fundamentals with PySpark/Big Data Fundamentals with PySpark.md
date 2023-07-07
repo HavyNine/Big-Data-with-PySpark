@@ -165,3 +165,10 @@ In the second part of the exercise, you'll first create a HashingTF() instance t
 ## Logistic Regression model training - 7
 
 After creating labels and features for the data, we’re ready to build a model that can learn from it (training). But before you train the model, in this final part of the exercise, you'll split the data into training and test, run Logistic Regression model on the training data, and finally check the accuracy of the model trained on training data.
+
+
+### Clustering
+
+## Loading and parsing the data - 8
+
+Clustering is the unsupervised learning task that involves grouping objects into clusters of high similarity. Unlike the supervised tasks, where data is labeled, clustering can be used to make sense of unlabeled data. PySpark MLlib includes the popular K-means algorithm for clustering. In this 3-part exercise, you'll find out how many clusters are there in a dataset containing the purchases made by customers of a wholesale distributor. The dataset is provided by the UCI Machine Learning Repository.
