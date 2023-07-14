@@ -29,6 +29,29 @@ aa_dfw_df = aa_dfw_df.drop(aa_dfw_df['Destination Airport'])
 # Show the DataFrame
 aa_dfw_df.show()
 
+# Saving a DataFrame in Parquet format - 3
+
+# View the row count of df1 and df2
+print("df1 Count: %d" % df1.count())
+print("df2 Count: %d" % df2.count())
+
+# Combine the DataFrames into one
+df3 = df1.union(df2)
+
+# Save the df3 DataFrame in Parquet format
+df3.write.parquet('AA_DFW_ALL.parquet', mode='overwrite')
+
+# SQL and Parquet - 4
+
+# Read the Parquet file into a new DataFrame and run a count
+flights_df = spark.read.parquet('AA_DFW_ALL.parquet')
+
+# Register the temp table
+flights_df.createOrReplaceTempView('flights')
+
+# Run a SQL query of the average flight duration
+avg_duration_df = spark.sql('SELECT avg(flight_duration) from flights').show()
+
 ## Manipulating DataFrames in the real world
 
 ## Improving Performance
