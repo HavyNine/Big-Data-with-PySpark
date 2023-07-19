@@ -39,6 +39,15 @@ You've looked at using various operations on DataFrame columns - now you can mod
 
 This is often one of the first steps in data cleaning - removing anything that is obviously outside the format. For this dataset, make sure to look at the original data and see what looks out of place for the VOTER_NAME column.
 
+### modifying DataFrame columns - 2
+
+Previously, you filtered out any rows that didn't conform to something generally resembling a name. Now based on your earlier work, your manager has asked you to create two new columns - first_name and last_name. She asks you to split the VOTER_NAME column into words on any space character. You'll treat the last word as the last_name, and all other words as the first_name. You'll be using some new functions in this exercise including .split(), .size(), and .getItem(). The .getItem(index) takes an integer value to return the appropriately numbered item in the column. The functions .split() and .size() are in the pyspark.sql.functions library.
+
+Please note that these operations are always somewhat specific to the use case. Having your data conform to a format often matters more than the specific details of the format. Rarely is a data cleaning task meant just for one person - matching a defined format allows for easier sharing of the data later (ie, Paul doesn't need to worry about names - Mary already cleaned the dataset).
+
+### When() - 3
+
+The .when() function allows you to when() -> then() style conditional statements to DataFrame operations. You'll want to use this whenever you want to add an if/else statement to DataFrame operations.
 
 ## Improving Performance
 
