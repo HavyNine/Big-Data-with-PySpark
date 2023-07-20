@@ -82,6 +82,37 @@ voter_df = voter_df.withColumn('last_name', voter_df['splits'].getItem(F.size('s
 # Add a column to voter_df for any voter with the title **Councilmember**
 voter_df = voter_df.withColumn('random_val', F.when(voter_df['TITLE'] == 'Councilmember', F.rand()))
 
+## When/otherwise clauses - 8
+
+# Add a column to voter_df for a voter based on their position
+voter_df = voter_df.withColumn('random_val',
+                                 F.when(voter_df['TITLE'] == 'Councilmember', F.rand())
+                                    .when(voter_df['TITLE'] == 'Mayor', 2)
+                                    .otherwise(0))
+
+# Show some of the DataFrame rows, noting whether the when clause worked
+voter_df.show()
+
+# Use the .filter() clause with random_val
+voter_df.filter(voter_df['random_val'] == 0).show()
+
+## User defined functions - 9
+
+# Define the method
+def getFirstAndMiddle(names):
+    # Return a space separated string of names
+    return ' '.join(names[0:2])
+
+# Define the method as a UDF
+udfFirstAndMiddle = F.udf(getFirstAndMiddle, StringType())
+
+# Create a new column using your UDF
+voter_df = voter_df.withColumn('first_and_middle_name', udfFirstAndMiddle(voter_df['splits']))
+
+# Show the DataFrame
+voter_df.show()
+
+
 
 ## Improving Performance
 

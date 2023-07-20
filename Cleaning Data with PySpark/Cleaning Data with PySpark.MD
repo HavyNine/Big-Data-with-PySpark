@@ -49,6 +49,10 @@ Please note that these operations are always somewhat specific to the use case. 
 
 The .when() function allows you to when() -> then() style conditional statements to DataFrame operations. You'll want to use this whenever you want to add an if/else statement to DataFrame operations.
 
+### When / Otherwise - 4
+
+This requirement is similar to the last, but now you want to add multiple values based on the voter's position. Modify your voter_df DataFrame to add a random number to any voting member that is defined as a Councilmember. Use 2 for the Mayor and 0 for anything other position.
+
 ## Improving Performance
 
 ## Improving Performance
