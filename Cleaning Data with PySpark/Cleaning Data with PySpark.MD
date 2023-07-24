@@ -141,3 +141,31 @@ You've cleaned up your data considerably by removing the invalid rows from the D
 ### Further parsing - 5
 
 You've molded this dataset into a significantly different format than it was before, but there are still a few things left to do. You need to prep the column data for use in later analysis and remove a few intermediary columns.
+
+### Validate rows via join - 6
+
+Another example of filtering data is using joins to remove invalid entries. You'll need to verify the folder names are as expected based on a given DataFrame named valid_folders_df. The DataFrame split_df is as you last left it with a group of split columns.
+
+### Examining invalid rows - 7
+
+You've successfully filtered out the rows using a join, but sometimes you'd like to examine the data that is invalid. This data can be stored for later processing or for troubleshooting your data sources.
+
+You want to find the difference between two DataFrames and store the invalid rows.
+
+### Dog parsing - 8
+
+You've done a considerable amount of cleanup on the initial dataset, but now need to analyze the data a bit deeper. There are several questions that have now come up about the type of dogs seen in an image and some details regarding the images. You realize that to answer these questions, you need to process the data into a specific type. Before you can use it, you'll need to create a schema / type to represent the dog details.
+
+### Per image count - 9
+
+Your next task in building a data pipeline for this dataset is to create a few analysis oriented columns. You've been asked to calculate the number of dogs found in each image based on your dog_list column created earlier. You have also created the DogType which will allow better parsing of the data within some of the data columns.
+
+### Percentage dog pixels - 10
+
+The final task for parsing the dog annotation data is to determine the percentage of pixels in each image that represents a dog (or dogs). You'll need to use the various techniques you've learned in this course to help calculate this information and add it as columns for later analysis.
+
+To calculate the percentage of pixels, first calculate the total number of pixels representing each dog then sum them for the image. You can calculate the bounding box with the formula:
+
+(Xend - Xstart) * (Yend - Ystart)
+
+NOTE: You can ignore the possibility of overlapping bounding boxes in this instance.
